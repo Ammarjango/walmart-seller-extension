@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Walmart Extension</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+
+
+        .show-product-data {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 34%;
+            height: 100vh;
+            position: fixed;
+            overflow-y: auto;
+            padding-bottom: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hide the scrollbar for Chrome, Safari and Opera */
+        .show-product-data::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Hide the scrollbar for IE, Edge and Firefox */
+        .show-product-data {
+            -ms-overflow-style: none;
+            /* IE and Edge */
+            scrollbar-width: none;
+            /* Firefox */
+        }
+
+        .centered {
+            position: fixed;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 25%;
+            left: 70%;
+        }
+
+
+        .centered form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .centered form label {
+            align-self: flex-start;
+            width: 100%;
+            margin-bottom: 5px;
+            padding-left: 5px;
+        }
+
+        .centered form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 2px solid #E3E4E5;
+        }
+
+        .centered form button {
+            padding: 10px 20px;
+            gap: 8px;
+            background-color: rgba(0, 113, 220, 1);
+            color: aliceblue;
+            border: none;
+            border-radius: 40px;
+        }
+
+        .centered form button:hover {
+            cursor: pointer;
+        }
+
+        .centered form p {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .firstdiv-logo {
+            width: 88px;
+            height: 88px;
+        }
+
+        .second-header-div {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px;
+        }
+
+        .second-header-img {
+            width: 50px;
+            height: 50px;
+        }
+
+        .second-div-header-btn {
+            border: none;
+            padding-top: 10px;
+            background-color: white;
+        }
+
+        .second-div-header-btn:hover {
+            cursor: pointer;
+            background-color: #e0e0e0;
+            /* Optional: change background color on focus */
+        }
+
+
+        .img-fluid {
+            width: 100%;
+            height: auto;
+        }
+
+        .second-div {
+            /* padding: 10px; */
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            background-color: #f0f0f0;
+        }
+
+        .second-image-div {
+            height: 160px;
+            width: 130px;
+            padding: 10px;
+            border: 1px solid #E3E4E5;
+            /* background-color: white; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 2px 2px 1px 3px lightgray;
+
+        }
+
+        .second-image-div img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+
+        }
+
+        .second-description-div {
+            /* border: 1px solid black; */
+            width: 100%;
+            padding-top: 0px;
+            padding-left: 5px;
+            height: 165px;
+            /* background-color: white; */
+
+        }
+
+        .second-div-walmart {
+            margin: 0px;
+            font-size: 12px;
+            padding-bottom: 5px;
+            padding-top: 5pxs;
+        }
+
+        .second-description-div-title-heading {
+            margin: 0px;
+            font-weight: bold;
+            font-size: 16px;
+            text-align: left;
+            border: none;
+        }
+
+        .second-description-div-title-heading:hover {
+            cursor: pointer;
+        }
+
+        .second-description-div-review {
+            display: flex;
+        }
+
+        .show-ratting-and-reviews-count {
+            display: flex;
+        }
+
+        .second-description-div-review-and-amount {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .show-ratting-only {
+            margin: 5px;
+
+        }
+
+        .show-amount-only {
+            margin: 5px;
+            padding-left: 10px;
+        }
+
+        .star-Image {
+            padding-top: 10px;
+            /* margin: auto; */
+            height: 25px;
+            width: 20px;
+        }
+
+        .product-price-only {
+            margin-top: 0px;
+            margin-right: 20px;
+            margin-bottom: 0px;
+            color: #2A8703;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .second-links-div {
+            margin: 0px;
+        }
+
+        .second-links-div button {
+            border: none;
+            margin: 0px;
+        }
+
+        .second-links-div button:hover {
+            cursor: pointer;
+        }
+
+        .second-links-div-amazon-btn {
+            margin-top: 3px;
+        }
+
+        .thired-div {
+            display: flex;
+            /* border: 1px solid black; */
+            padding: 10px;
+            padding-top: 0px;
+            padding-bottom: 0px;
+            margin-top: 10px;
+        }
+
+        .item-id-heading {
+            font-size: 12px;
+            margin-bottom: 0px;
+            font-weight: 400;
+        }
+
+        .upc-id-heading {
+            font-size: 12px;
+            margin-bottom: 0px;
+            font-weight: 400;
+            margin-left: 20px;
+        }
+
+        .show-item-id {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #2A8703;
+            font-weight: 400;
+            border: none;
+            background-color: white;
+        }
+
+        .show-item-id:hover {
+            cursor: pointer;
+        }
+
+        .show-upc-id {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #0071DC;
+            font-weight: 400;
+            margin-left: 20px;
+            border: none;
+            background-color: white;
+        }
+
+        .show-upc-id:hover {
+            cursor: pointer;
+        }
+
+        .show-item-id-div {
+            flex: 0 0 20%;
+            padding-left: 5px;
+        }
+
+
+        .show-upc-div {
+            flex: 0 0 30%;
+            padding-left: 5px;
+            border-left: 1px solid rgba(227, 228, 229, 1);
+            border-right: 1px solid rgba(227, 228, 229, 1);
+        }
+
+        .show-badges-div {
+            flex: 0 0 50%;
+            display: flex;
+            padding-left: 25px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .showBadges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .forth-div {
+            width: 100%;
+            padding: 10px;
+            padding-top: 0px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 0px;
+            /* border-top: 1px solid #ccc; */
+        }
+
+        .tab-button.active {
+            border-top: 4px solid rgba(0, 113, 220, 1);
+            font-weight: bold;
+            /* background-color: white; */
+
+        }
+
+        .tab-content {
+            margin: 0px;
+            margin-top: 10px;
+
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        .fifth-div {
+            width: 100%;
+            padding: 2px;
+            margin-top: 15px;
+        }
+
+
+        .accordion-item {
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+
+            /* background-color: #f0f0f0; */
+        }
+
+        .accordion-title {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .accordion-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .arrow {
+            display: inline-block;
+            margin-left: 5px;
+            /* Adjust spacing between text and arrow */
+            font-size: 20px;
+            /* Adjust size of the icon */
+            line-height: 1;
+            /* Ensures the icon is vertically centered */
+        }
+
+        .closed .arrow::before {
+            content: "\u{1F53B}";
+        }
+
+        .accordion-content {
+            padding: 10px;
+            display: none;
+        }
+
+        .maketPlace-fees {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0px;
+        }
+
+        .Marketplace-Fees-heading {
+            font-size: 12px;
+            margin-top: 0px;
+        }
+
+        .Marketplace-Fees-value {
+            margin-top: 0px;
+            font-size: 14px;
+            color: rgba(0, 113, 220, 1);
+        }
+
+        .seller-Commission {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0px;
+        }
+
+        .estSales-and-Revenue {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .esSales-div,
+        .revenue-div {
+            display: flex;
+            flex-direction: column;
+            text-align: justify;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(234, 243, 230, 1);
+            background-color: rgba(234, 243, 230, 0.3);
+            width: 140px;
+            height: 80px;
+            border-radius: 5px;
+        }
+
+        .esSales-div-price,
+        .esSales-div-description,
+        .revenue-div-price,
+        .revenue-div-description {
+            margin: 0px;
+
+        }
+
+        .esSales-div-price,
+        .revenue-div-price {
+            color: rgba(42, 135, 3, 1);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .esSales-div-description,
+        .revenue-div-description {
+            font-size: 14px;
+        }
+
+        .horizontal-row {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 10px;
+            margin-right: 10px;
+            /* color: rgba(227, 228, 229, 0.08); */
+            border: 1px solid rgba(227, 228, 229, 1);
+        }
+
+        .enter-value-heading-div,
+        .results-heading-div {
+            margin-left: 10px;
+            margin-bottom: 0px;
+        }
+
+        .enter-value-heading {
+            font-size: 16px;
+            color: rgba(0, 113, 220, 1);
+        }
+
+        .resut-heading {
+            font-size: 16px;
+            color: rgba(255, 194, 32, 1);
+        }
+
+        .productCost-taxes-div,
+        .shippingFee-MinRoi-Div,
+        .totalCost-salePrice-div,
+        .profit-Roi-Div {
+            display: flex;
+            gap: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+            justify-content: space-between;
+        }
+
+        .profit-Roi-Div {
+            margin-bottom: 10px;
+        }
+
+        .product-cost-form-heading,
+        .taxes-form-heading,
+        .shippingFee-form-heading,
+        .saleMargin-form-heading,
+        .total-cost-form-heading,
+        .profit-form-heading,
+        .Roi-form-heading,
+        .salePrice-form-heading {
+            margin-bottom: 5px;
+            color: rgba(46, 47, 50, 1);
+            /* margin-top: 0px; */
+        }
+
+        .product-cost-form-heading,
+        .taxes-form-heading,
+        .total-cost-form-heading,
+        .salePrice-form-heading {
+            margin-top: 0px;
+        }
+
+        .product-cost-form-input,
+        .taxes-form-input,
+        .shippingFee-form-input,
+        .saleMargin-form-input,
+        .total-cost-form-input,
+        .salePrice-form-input,
+        .profit-form-input,
+        .Roi-form-input {
+            border-radius: 5px;
+            height: 40px;
+            border: 1px solid rgba(227, 228, 229, 1);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .sellers-heading-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            align-content: center;
+        }
+
+        .sllers-heading {
+            margin-left: 10px;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .seller-download-btn {
+            margin-right: 10px;
+            font-size: 14px;
+            color: rgba(0, 113, 220, 1);
+            text-decoration: none;
+            padding: 20px 4px 0px 5px;
+        }
+
+        .product-download-btn {
+            margin-right: 10px;
+            font-size: 14px;
+            color: rgba(0, 113, 220, 1);
+            text-decoration: none;
+            padding: 20px 4px 0px 5px;
+
+        }
+
+        .sixth-div {
+            width: 100%;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+
+            border: 2px solid rgba(227, 228, 229, 1);
+            border-radius: 10px;
+        }
+
+        .seller-info-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+            /* Center the text in the table */
+        }
+
+        .seller-info-table th,
+        .seller-info-table td {
+            padding: 8px;
+            padding-top: 0px;
+            /* padding-bottom: 0px; */
+            /* margin-top: 0px;
+            margin-bottom: 0px; */
+            border: none;
+        }
+
+        .seller-info-table thead {
+            font-weight: bold;
+        }
+
+        #productRatingTable img {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .settingsDiv {
+            width: 100%;
+
+        }
+
+        .back-button {
+            display: flex;
+            gap: 15px;
+            border: none;
+            background-color: white;
+            margin-top: 30px;
+        }
+
+        .back-button:hover {
+            cursor: pointer;
+        }
+
+        .copy-clipboard-div,
+        .Search-Preference-div,
+        .customize-roi-div {
+            width: 100%;
+            padding: 10px;
+            padding-bottom: 0px;
+        }
+
+        .copy-clipboard-heading,
+        .Search-Preference-heading,
+        .customize-roi-heading {
+            margin-bottom: 0px;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .copy-clipboard-description,
+        .Search-Preference-description,
+        .customize-roi-description {
+            font-size: 14px;
+            color: rgba(70, 71, 74, 1);
+        }
+
+        .title-itemId-upc-toggle-div,
+        .title-upc-radio-btn-div,
+        .minRoi-radioWfs-radioFbm-setting-div {
+            width: 95%;
+            margin: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid rgba(227, 228, 229, 1);
+            border-radius: 10px;
+        }
+
+        .save-cancel-div {
+            width: 95%;
+            margin: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .title-toggle-div,
+        .itemId-toggle-div,
+        .upc-toggle-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Base styles for toggle switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider.round {
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.slider {
+            background-color: rgba(0, 113, 220, 1);
+        }
+
+        input:checked+.slider:before {
+            transform: translateX(20px);
+        }
+
+        .title-toggle-div,
+        .itemId-toggle-div,
+        .upc-toggle-div {
+            margin-bottom: 0px;
+            margin-bottom: 0px;
+        }
+
+        .title-upc-radio-btn-div,
+        .minRoi-radioWfs-radioFbm-setting-div,
+        .save-cancel-div {
+            margin-top: 10px;
+        }
+
+        .radio-label {
+            display: flex;
+            margin: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .radio-label input[type="radio"] {
+            margin-right: 20px;
+        }
+
+        .upc-radio-btn,
+        .title-radio-btn {
+            height: 20px;
+            width: 20px;
+        }
+
+        .fulfillment-method-wfs,
+        .fulfillment-method-fbm {
+            height: 20px;
+            width: 20px;
+        }
+
+        .minRoi-setting-heading,
+        .wfs-fbm-setting-heading {
+            font-size: 14px;
+            padding-left: 10px;
+
+        }
+
+        .minRoi-setting-input {
+            width: 95%;
+            height: 40px;
+            border-radius: 5px;
+            margin-left: 12px;
+            text-align: center;
+            padding: 8px, 16px, 8px, 16px;
+            border-color: rgba(227, 228, 229, 1);
+            font-size: 16px;
+        }
+
+        /* Styles for the save-cancel-div */
+        .save-cancel-div {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        /* Styles for action buttons */
+        .action-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 40px;
+            width: 115px;
+        }
+
+        #cancelButton {
+            background-color: #6c757d;
+        }
+
+        #cancelButton:hover,
+        #saveButton:hover {
+            opacity: 0.9;
+        }
+
+        .tooltip {
+            position: absolute;
+            top: 30%;
+            left: 80%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- First Div -->
+    <div id="logoDiv" class="centered">
+        <img id="logoImage" alt="Logo" class="firstdiv-logo">
+        <form id="loginForm" class="mt-3">
+            <label for="email">Email Address</label>
+            <input type="text" id="email" class="form-control">
+            <button type="button" id="loginButton">Log in</button>
+            <p>Don’t have an account? <a href="#">Start Free Trial</a></p>
+        </form>
+    </div>
+
+
+    <!-- div show when the produt is not open -->
+    <div id="noData" class="centered hidden">
+        <h2>Please Select the Item First then open this extension</h2>
+    </div>
+
+
+
+    <!-- Second Div -->
+    <div id="contentDiv" class="hidden show-product-data">
+        <div class="second-header-div">
+            <div class="second-header-img">
+                <img id="contentLogoImage" alt="Logo" class="img-fluid " />
+            </div>
+            <div class="col-auto d-flex align-items-center">
+                <button class="second-div-header-btn " id="productDownloadBtn">
+                    <img id="downloadImage" alt="Download" class="" />
+                </button>
+                <button class="second-div-header-btn">
+                    <img id="settingImage" alt="Settings" class="img-fluid" />
+                </button>
+                <button class="second-div-header-btn">
+                    <img id="logoutImage" alt="Logout" class="img-fluid" />
+                </button>
+
+            </div>
+        </div>
+
+
+        <!-- Setting Div -->
+        <div id="settingsDiv" class="hidden setting-div">
+            <div class="setting-back-btn-div">
+                <button id="backButton" class="back-button">
+                    <img id="leftArrowImage" alt="Left Arrow" class="img-fluid" />
+                    Settings
+                </button>
+            </div>
+
+            <!-- div of copy of clipboard -->
+            <div class="copy-clipboard-div">
+                <p class="copy-clipboard-heading">Copy to Clipboard</p>
+                <p class="copy-clipboard-description">Activate click functionality on key elements to allow easy
+                    copying.</p>
+            </div>
+
+            <!-- div of toogle btns -->
+            <div class="title-itemId-upc-toggle-div">
+                <div class="title-toggle-div">
+                    <p class="title-heading-toogle-div">Product Title</p>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="productTitleToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+                <div class="itemId-toggle-div">
+                    <p class="item-heading-toogle-div">Item ID</p>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="itemIdToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="upc-toggle-div">
+                    <p class="upc-heading-toogle-div">UPCs</p>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="upcToggle">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- div of search prefrence heading-->
+            <div class="Search-Preference-div">
+                <p class="Search-Preference-heading">Search Preference</p>
+                <p class="Search-Preference-description">Select your preferred search method, enabling a personalized
+                    search experience tailored to your needs.</p>
+            </div>
+
+            <!-- div of sarch prefrence radio btn div -->
+            <div class="title-upc-radio-btn-div">
+                <label class="radio-label">
+                    <input type="radio" name="title-upc" value="producttitle" id="productTitleRadio"
+                        class="title-radio-btn" />
+                    Product Title
+                </label>
+
+                <label class="radio-label">
+                    <input type="radio" name="title-upc" value="upc" id="upcRadio" class="upc-radio-btn">
+                    UPCs
+                </label>
+            </div>
+
+            <!-- div of Customize ROI heading-->
+            <div class="customize-roi-div">
+                <p class="customize-roi-heading">Customize ROI</p>
+                <p class="customize-roi-description">Allowing flexibility in calculation preferences to match your
+                    desired goals.</p>
+            </div>
+
+            <!-- div for customize ROI -->
+            <div class="minRoi-radioWfs-radioFbm-setting-div">
+                <div class="MinRoi-setting-form-heading-input">
+                    <p class="minRoi-setting-heading">
+                        Min. ROI%
+                    </p>
+                    <input type="number" class="minRoi-setting-input" id="minRoiInput" />
+                </div>
+                <div class="wfs-fbm-setting-div">
+                    <p class="wfs-fbm-setting-heading">Choose Fulfillment Method</p>
+                    <div class="fulfillment-method-radio-btn-div">
+                        <label class="radio-label">
+                            <input type="radio" name="fulfillment-method" class="fulfillment-method-wfs" value="wfs"
+                                id="wfsRadio" checked />
+                            WFS
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="fulfillment-method" class="fulfillment-method-fbm" value="fbm"
+                                id="fbmRadio" />
+                            FBM
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- cancel and save button div -->
+            <!-- cancel and save button div -->
+            <div class="save-cancel-div">
+                <button id="cancelButton" class="action-btn">Cancel</button>
+                <button id="saveButton" class="action-btn">Save</button>
+            </div>
+
+
+        </div>
+
+        <!-- show item info div -->
+        <div class="show-item-info-div">
+            <div class="second-div">
+                <div class="second-image-div">
+                    <img id="productImage" alt="Product Image" class="img-fluid" />
+                </div>
+                <div class="second-description-div">
+                    <p class="second-div-walmart">Walmart</p>
+                    <div class="second-description-div-title">
+                        <button id="productTitle" class="second-description-div-title-heading"></button>
+                    </div>
+                    <div class="second-description-div-review-and-amount">
+                        <div class="second-description-div-review">
+                            <div class="show-ratting-and-reviews-count">
+                                <img id="starImage" alt="Star" class="star-Image" />
+                                <p id="ratingValue" class="show-ratting-only"></p>
+                                <p id="reviewCount" class="show-amount-only"></p>
+                            </div>
+                        </div>
+                        <div class="second-description-div-amount">
+                            <p id="productPrice" class="product-price-only"></p>
+                        </div>
+                    </div>
+                    <div class="second-links-div">
+                        <button class="second-links-div-google-btn">
+                            <img id="googleBtntImage" alt="google" class="img-fluid" />
+                        </button>
+                        <button class="second-links-div-amazon-btn">
+                            <img id="amazonBtnImage" alt="amazon" class="img-fluid" />
+                        </button>
+                        <button class="second-links-div-ebay-btn">
+                            <img id="ebayBtnImage" alt="ebay" class="img-fluid" />
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="thired-div">
+                <div class="show-item-id-div">
+                    <p class="item-id-heading"> Item ID</p>
+                    <button id="itemId" class="show-item-id">
+                    </button>
+                </div>
+                <div class="show-upc-div">
+                    <p class="upc-id-heading">UPC</p>
+                    <button id="upcId" class="show-upc-id"></button>
+
+                </div>
+                <div class="show-badges-div">
+                    <p class="item-id-heading">Badges</p>
+
+                    <div class="showBadges" id="showBadgeDiv"></div>
+                </div>
+            </div>
+            <div class="forth-div">
+                <div class="tabs">
+                    <button class="tab-button active" data-tab="description">Description</button>
+                    <button class="tab-button" data-tab="specifications">Specifications</button>
+                    <!-- <button class="tab-button" data-tab="shipping">Shipping</button> -->
+                </div>
+                <div class="tab-content">
+                    <div id="description" class="tab-panel active">
+                        <p id="descriptionContent"></p>
+                    </div>
+                    <div id="specifications" class="tab-panel">
+                        <p id="specificationsContent"></p>
+                    </div>
+                    <div id="shipping" class="tab-panel">
+                        <p id="shippingContent"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="fifth-div">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <p class="accordion-title">Calculator</p>
+                        <button class="accordion-toggle" aria-expanded="false">
+                            <span class="arrow">&#128899;</span> <!-- Default: Open icon -->
+                        </button>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="maketPlace-fees">
+                            <p class="Marketplace-Fees-heading">Marketplace Fees</p>
+                            <p class="Marketplace-Fees-value">$15%</p>
+                        </div>
+                        <!-- <div class="seller-Commission">
+                            <p class="Marketplace-Fees-heading">Seller Commissions</p>
+                            <p class="Marketplace-Fees-value">$5%</p>
+                        </div> -->
+                        <div class="estSales-and-Revenue">
+                            <div class="esSales-div">
+                                <p class="esSales-div-price" id="esSales-show"></p>
+                                <p class="esSales-div-description">Est. Sales/month</p>
+                            </div>
+                            <div class="revenue-div">
+                                <p class="revenue-div-price" id="revenue-show"></p>
+                                <p class="revenue-div-description">Revenue</p>
+                            </div>
+                        </div>
+                        <hr class="horizontal-row" />
+                        <div class="enter-value-heading-div">
+                            <p class="enter-value-heading">Enter values</p>
+                        </div>
+                        <div class="productCost-taxes-div">
+                            <div class="product-cost-form-div">
+                                <p class="product-cost-form-heading">Product Cost</p>
+                                <input type="text" class="product-cost-form-input" id="productCostInput" />
+                            </div>
+                            <div class="taxes-form-div">
+                                <p class="taxes-form-heading">Taxes</p>
+                                <input type="text" class="taxes-form-input" id="taxesInput" />
+                            </div>
+                        </div>
+                        <div class="shippingFee-MinRoi-Div">
+                            <div class="shippingFee-form-div">
+                                <p class="shippingFee-form-heading">Shipping Fee</p>
+                                <input type="text" class="shippingFee-form-input" id="productShippingFee" />
+                            </div>
+                            <div class="saleMargin-form-div">
+                                <p class="saleMargin-form-heading">Sale Margin</p>
+                                <input type="text" class="saleMargin-form-input" id="saleMarginInput" />
+                            </div>
+                        </div>
+                        <div class="results-heading-div">
+                            <p class="resut-heading">Results</p>
+                        </div>
+                        <div class="totalCost-salePrice-div">
+                            <div class="total-cost-form-div">
+                                <p class="total-cost-form-heading">Total Cost</p>
+                                <input type="text" class="total-cost-form-input" id="totalCostInput" readonly />
+                            </div>
+                            <div class="MaxButCost-form-div">
+                                <p class="salePrice-form-heading">Sale Price</p>
+                                <input type="text" class="salePrice-form-input" id="salePriceInput" readonly />
+                            </div>
+                        </div>
+                        <div class="profit-Roi-Div">
+                            <div class="profit-form-div">
+                                <p class="profit-form-heading">Profit</p>
+                                <input type="text" class="profit-form-input" id="profitFormInput" readonly />
+                            </div>
+                            <div class="Roi-form-div">
+                                <p class="Roi-form-heading">ROI</p>
+                                <input type="text" class="Roi-form-input" id="roiFormInput" readonly />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sellers-heading-div">
+                <p class="sllers-heading">Sellers</p>
+                <button class=" second-div-header-btn" id="sellerDownloadBtn">
+                    <img id="downloadImage2" alt="Download" class="img-fluid" />
+                </button>
+
+
+            </div>
+            <div class="sixth-div">
+                <table class="seller-info-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left;">Name</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                            <th>Fulfilment</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="sellertNameTable" style="text-align: left;"></td>
+                            <td id="productPriceTable"></td>
+                            <td id="productStockTable"></td>
+                            <td id="productFulfilment"></td>
+                            <td id="productRatingTable"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = chrome.runtime.getURL('styles.css');
+            document.head.appendChild(link);
+
+            const logoImage = document.getElementById('logoImage');
+            logoImage.src = chrome.runtime.getURL('images/WAP_Circle_Logo.png');
+
+            const downloadImage = document.getElementById('downloadImage');
+            downloadImage.src = chrome.runtime.getURL('images/download.png');
+
+            const settingImage = document.getElementById('settingImage');
+            settingImage.src = chrome.runtime.getURL('images/setting.png');
+
+            const logoutImage = document.getElementById('logoutImage');
+            logoutImage.src = chrome.runtime.getURL('images/logout.png');
+
+
+            const contentLogoImage = document.getElementById('contentLogoImage');
+            contentLogoImage.src = chrome.runtime.getURL('images/logo.png');
+
+            const loginButton = document.getElementById('loginButton');
+            loginButton.addEventListener('click', function () {
+                document.getElementById('logoDiv').classList.add('hidden');
+                document.getElementById('contentDiv').classList.remove('hidden');
+            });
+
+            // Load the product image dynamically
+            const mediaThumbnail = document.querySelector('[data-testid="media-thumbnail"] img');
+            const productImage = document.getElementById('productImage');
+            if (mediaThumbnail && productImage) {
+                productImage.src = mediaThumbnail.src;
+            }
+
+            // Load the product title dynamically
+            const mainTitle = document.getElementById('main-title');
+            const productTitle = document.getElementById('productTitle');
+            if (mainTitle && productTitle) {
+                productTitle.textContent = mainTitle.textContent;
+            }
+
+            // Load the star image
+            const starImage = document.getElementById('starImage');
+            starImage.src = chrome.runtime.getURL('images/star.png');
+
+            // Load the social-media btns
+            const googleBtntImage = document.getElementById('googleBtntImage');
+            googleBtntImage.src = chrome.runtime.getURL('images/googleLogo.png');
+
+            const amazonBtnImage = document.getElementById('amazonBtnImage');
+            amazonBtnImage.src = chrome.runtime.getURL('images/amazonLogo.png');
+
+            const ebayBtnImage = document.getElementById('ebayBtnImage');
+            ebayBtnImage.src = chrome.runtime.getURL('images/ebayLogo.png');
+
+            // Load the rating and review count dynamically
+            const ratingElement = document.querySelector('.rating-number');
+            const reviewElement = document.querySelector('[itemprop="ratingCount"]');
+            const ratingValue = document.getElementById('ratingValue');
+            const reviewCount = document.getElementById('reviewCount');
+
+            if (ratingElement && ratingValue) {
+                ratingValue.textContent = ratingElement.textContent.trim();
+            }
+
+            if (reviewElement && reviewCount) {
+                reviewCount.textContent = `(${reviewElement.textContent.trim()})`;
+            }
+
+            // Load the product price dynamically
+            const priceElement = document.querySelector('[data-testid="price-wrap"] span[itemprop="price"]');
+            const productPrice = document.getElementById('productPrice');
+            if (priceElement && productPrice) {
+                const priceText = priceElement.textContent.replace("Now", "").trim();
+                productPrice.textContent = priceText;
+            }
+
+            // Function to open search result in new tab
+            function openSearchResult(url) {
+                const productTitle = document.getElementById('productTitle').textContent.trim();
+                const searchUrl = url + encodeURIComponent(productTitle);
+                window.open(searchUrl, '_blank');
+            }
+
+            // Add event listeners to the buttons
+            const googleBtn = document.querySelector('.second-links-div-google-btn');
+            const amazonBtn = document.querySelector('.second-links-div-amazon-btn');
+            const ebayBtn = document.querySelector('.second-links-div-ebay-btn');
+
+            googleBtn.addEventListener('click', function () {
+                openSearchResult('https://www.google.com/search?q=');
+            });
+
+            amazonBtn.addEventListener('click', function () {
+                openSearchResult('https://www.amazon.com/s?k=');
+            });
+
+            ebayBtn.addEventListener('click', function () {
+                openSearchResult('https://www.ebay.com/sch/i.html?_nkw=');
+            });
+        });
+    </script>
+</body>
+
+</html>

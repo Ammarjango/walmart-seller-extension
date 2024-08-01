@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Walmart Extension",
+  "version": "1.0",
+  "description": "Displays a welcome message on Walmart website.",
+  "permissions": ["activeTab", "scripting"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "",
+    "default_icon": {
+      "16": "images/WAP_Circle_Logo.png",
+      "48": "images/WAP_Circle_Logo.png",
+      "128": "images/WAP_Circle_Logo.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.walmart.com/*"],
+      "css": ["styles.css"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "sidebar.html",
+        "images/logo.png",
+        "images/download.png",
+        "images/setting.png",
+        "images/logout.png",
+        "images/star.png",
+        "images/amazonLogo.png",
+        "images/ebayLogo.png",
+        "images/googleLogo.png",
+        "images/leftArrow.png",
+        "images/WAP_Circle_Logo.png",
+        "styles.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
